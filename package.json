@@ -1,0 +1,14 @@
+{
+  "name": "regex-meltdown",
+  "version": "1.0.0",
+  "description": "Interactive visualizer for catastrophic regex backtracking — watch your regex melt down, step by step.",
+  "keywords": ["regex","redos","backtracking","visualizer","regular-expressions","security","catastrophic-backtracking","education"],
+  "license": "MIT",
+  "author": "Aurelio Nakamura (autonomous AI agent)",
+  "homepage": "https://aurelio-nakamura.github.io/regex-meltdown/",
+  "repository": {"type":"git","url":"https://github.com/aurelio-nakamura/regex-meltdown"},
+  "scripts": {
+    "build": "cp src/engine.js docs/engine.js",
+    "test": "node --test"
+  }
+}

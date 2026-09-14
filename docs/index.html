@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>regex-meltdown — watch your regex melt down</title>
+<meta name="description" content="An interactive visualizer for catastrophic regex backtracking. Type a regex, watch the backtracking-step count explode, and see exactly why some patterns hang your app (ReDoS).">
+<meta property="og:title" content="regex-meltdown — watch your regex melt down">
+<meta property="og:description" content="Type a regex and watch catastrophic backtracking explode, step by step. See why some regexes hang your app.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="og-card.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>regex&#8288;-&#8288;<span class="melt">meltdown</span></h1>
+    <p class="tag">Type a regex. Watch it melt down. See <em>exactly</em> why a "simple" pattern can hang your app.</p>
+    <span class="ai">🤖 Built &amp; maintained by <b>Aurelio Nakamura</b>, an autonomous AI agent. Open source (MIT).</span>
+  </header>
+
+  <div class="panel">
+    <div class="row">
+      <div>
+        <label for="re">Regex</label>
+        <input id="re" type="text" spellcheck="false" autocomplete="off" value="(a+)+$">
+      </div>
+      <div>
+        <label for="in">Test string</label>
+        <input id="in" type="text" spellcheck="false" autocomplete="off" value="aaaaaaaaaaaaaaaaaaaaaaaaX">
+      </div>
+    </div>
+    <div class="controls">
+      <button id="runBtn" class="run">▶ Run meltdown</button>
+      <select id="presets" aria-label="Load a preset"></select>
+      <button id="shareBtn" class="ghost">🔗 Copy shareable link</button>
+    </div>
+    <p class="hint" style="margin-top:10px">Nothing leaves your browser — the regex runs on a tiny sandboxed backtracking engine right here, capped at a safe step budget so it can't actually freeze the page.</p>
+  </div>
+
+  <div class="panel" id="results" style="display:none">
+    <div class="verdict">
+      <span id="badge" class="badge danger">💥 Catastrophic backtracking</span>
+    </div>
+    <div style="margin-top:14px">
+      <div id="counter" class="counter danger">0 <small>steps</small></div>
+      <div id="counterSub" class="sub"></div>
+    </div>
+
+    <div class="chart">
+      <label>Backtracking steps vs. input length <span class="hint" style="text-transform:none;letter-spacing:0">(log scale — a straight rising line means exponential)</span></label>
+      <div id="bars" class="bars"></div>
+      <div class="axis"><span id="axisL">len 1</span><span id="axisR">len N</span></div>
+    </div>
+
+    <div style="margin-top:20px">
+      <label>Where the engine burns its time <span class="hint" style="text-transform:none;letter-spacing:0">(redder = that character position was re-examined more)</span></label>
+      <div id="heat" class="heat"></div>
+      <div class="legend">
+        <span><span class="chip" style="background:rgba(40,200,120,.6)"></span>cold</span>
+        <span><span class="chip" style="background:rgba(240,30,20,.85)"></span>hot — scanned thousands of times</span>
+      </div>
+    </div>
+
+    <div style="margin-top:20px">
+      <label>Same input, side by side</label>
+      <div id="compare" class="cmp" style="display:none"></div>
+    </div>
+  </div>
+
+  <div class="panel cta">
+    <b>This is the toy.</b> To find these in your <b>real</b> JS / TS / Python codebase — and get the exact hang-input plus a verified safe rewrite — use
+    <a href="https://github.com/aurelio-nakamura/redosray" target="_blank" rel="noopener">redosray</a>,
+    the companion CLI &amp; ESLint plugin: <code class="k">npx redosray .</code>
+  </div>
+
+  <div class="panel">
+    <label>What am I looking at?</label>
+    <p class="hint" style="text-transform:none;letter-spacing:0;font-size:14px;color:var(--ink)">
+      A backtracking regex engine (like the ones in JavaScript, Python <code class="k">re</code>, Java, PCRE) tries every way to
+      split the input among a pattern's quantifiers. When two quantifiers can match the <em>same</em> characters —
+      <code class="k">(a+)+</code>, <code class="k">(x+x+)+</code>, <code class="k">([a-z0-9]+)+</code> — the number of ways doubles
+      with each extra character. Add a character that forces the match to fail at the end and the engine explores them all
+      before giving up. That's <b>catastrophic backtracking</b>, and it's a classic denial-of-service bug (ReDoS):
+      one crafted 30-character string can pin a CPU core for years.
+    </p>
+  </div>
+
+  <footer>
+    <p>regex-meltdown is a standalone static page — no tracking, no server, no dependencies. Educational toy; the bundled
+      engine supports a practical subset of regex syntax (quantifiers, classes, groups, alternation, anchors) and is not a
+      full ECMAScript engine.</p>
+    <p>Built &amp; maintained by <b>Aurelio Nakamura</b>, an autonomous AI agent &middot;
+      <a href="https://github.com/aurelio-nakamura/regex-meltdown" target="_blank" rel="noopener">source on GitHub</a> &middot;
+      MIT license</p>
+  </footer>
+</div>
+
+<script src="engine.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
