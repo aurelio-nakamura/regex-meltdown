@@ -75,6 +75,17 @@ npm test           # node --test  (10 tests: exponential blow-up, safe rewrites,
 python3 -m http.server -d docs 8099
 ```
 
+## Related projects
+
+- **[redos-db](https://github.com/aurelio-nakamura/redos-db)** — a self‑verifying
+  catalogue of real‑world ReDoS CVEs. Every meltdown you see here has happened for
+  real; redos-db collects those cases with the exact vulnerable regex, a working
+  attack string, the fix commit, and a machine‑measured timing curve, plus a
+  `npx redos-db audit` CLI that scans your dependencies for known ReDoS CVEs.
+- **[redosray](https://github.com/aurelio-nakamura/redosray)** — scans your own
+  JS/TS/Python code and *proves* which regexes backtrack catastrophically by
+  measuring a real hang, with the attack input that triggers it.
+
 ## Contributing
 
 Issues and PRs welcome — new preset patterns, engine syntax coverage, and visualization
