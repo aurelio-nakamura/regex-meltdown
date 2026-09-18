@@ -3,33 +3,40 @@
 *{margin:0;box-sizing:border-box}
 html,body{width:1200px;height:630px;overflow:hidden}
 body{background:radial-gradient(900px 500px at 75% -10%,#1a2136 0%,#0b0d12 60%);
-  color:#e8ecf4;font-family:system-ui,Segoe UI,Roboto,Arial,sans-serif;padding:64px 70px;position:relative}
-h1{font-size:76px;letter-spacing:-2px;margin-bottom:6px}
+  color:#e8ecf4;font-family:system-ui,Segoe UI,Roboto,Arial,sans-serif;padding:60px 70px;position:relative}
+h1{font-size:74px;letter-spacing:-2px;margin-bottom:4px}
 .melt{background:linear-gradient(90deg,#ffb020,#ff4d5e,#ff7a3c);-webkit-background-clip:text;background-clip:text;color:transparent}
-.sub{font-size:27px;color:#a4adc2;margin-bottom:34px}
-.re{font-family:var(--mono);font-size:34px;color:#e8ecf4;background:#0d1017;border:1px solid #262c3a;
-  border-radius:12px;padding:14px 22px;display:inline-block}
-.bars{display:flex;align-items:flex-end;gap:9px;height:150px;margin-top:40px}
-.bar{width:34px;border-radius:6px 6px 0 0;background:linear-gradient(180deg,#3a4470,#2a3040)}
+.sub{font-size:29px;color:#c9d2e3;margin-bottom:30px}
+.sub b{color:#ff6b78}
+.card{background:#0d1017;border:1px solid #262c3a;border-radius:14px;padding:20px 24px;display:inline-block}
+.tag{font-size:19px;color:#8b93a7;margin-bottom:8px;letter-spacing:.3px}
+.tag b{color:#ffb020}
+.re{font-family:var(--mono);font-size:36px;color:#e8ecf4}
+.re .hit{color:#ff6b78}
+.bars{display:flex;align-items:flex-end;gap:9px;height:132px;margin-top:34px}
+.bar{width:32px;border-radius:6px 6px 0 0;background:linear-gradient(180deg,#3a4470,#2a3040)}
 .big{position:absolute;right:70px;bottom:150px;text-align:right}
-.big .n{font-family:var(--mono);font-size:70px;font-weight:800;color:#ff4d5e;line-height:1}
-.big .l{font-size:22px;color:#a4adc2}
-.foot{position:absolute;left:70px;bottom:46px;font-size:20px;color:#8b93a7}
+.big .n{font-family:var(--mono);font-size:58px;font-weight:800;color:#ff4d5e;line-height:1.05}
+.big .l{font-size:21px;color:#a4adc2}
+.foot{position:absolute;left:70px;bottom:44px;font-size:20px;color:#8b93a7}
 .foot b{color:#c9d2e3}
 </style></head><body>
 <h1>regex&#8288;-&#8288;<span class="melt">meltdown</span></h1>
-<div class="sub">Type a regex. Watch it melt down. See why it hangs your app.</div>
-<div class="re">(a+)+$ &nbsp;⟶&nbsp; <span style="color:#ff6b78">aaaaaaaaaaaaaaaaaaaaX</span></div>
+<div class="sub">Watch the regex that <b>took down Cloudflare</b> — live in your browser.</div>
+<div class="card">
+<div class="tag">Cloudflare global outage · <b>2 Jul 2019</b></div>
+<div class="re">.*.*=.*&nbsp;&nbsp;⟶&nbsp;&nbsp;<span class="hit">x=xxxxxxxxxxxxxxxxxxxxxxx</span></div>
+</div>
 <div class="bars">
 <div class="bar" style="height:6px"></div>
 <div class="bar" style="height:10px"></div>
 <div class="bar" style="height:16px"></div>
 <div class="bar" style="height:26px"></div>
 <div class="bar" style="height:44px"></div>
-<div class="bar" style="height:72px;background:linear-gradient(180deg,#ffb020,#ff7a3c)"></div>
-<div class="bar" style="height:110px;background:linear-gradient(180deg,#ffb020,#ff7a3c)"></div>
-<div class="bar" style="height:150px;background:linear-gradient(180deg,#ff4d5e,#ff7a3c)"></div>
+<div class="bar" style="height:70px;background:linear-gradient(180deg,#ffb020,#ff7a3c)"></div>
+<div class="bar" style="height:104px;background:linear-gradient(180deg,#ffb020,#ff7a3c)"></div>
+<div class="bar" style="height:140px;background:linear-gradient(180deg,#ff4d5e,#ff7a3c)"></div>
 </div>
-<div class="big"><div class="n">8,000,000+</div><div class="l">backtracking steps &nbsp;💥</div></div>
+<div class="big"><div class="n">∝ n²</div><div class="l">CPU melts as input grows &nbsp;💥</div></div>
 <div class="foot">Interactive · in-browser · open source &nbsp;·&nbsp; <b>built by an autonomous AI agent</b></div>
 </body></html>
