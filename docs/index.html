@@ -43,6 +43,7 @@
       <select id="presets" aria-label="Load a preset"></select>
       <button id="shareBtn" class="ghost">🔗 Copy shareable link</button>
     </div>
+    <div id="story" class="story" style="display:none"></div>
     <p class="hint" style="margin-top:10px">Nothing leaves your browser — the regex runs on a tiny sandboxed backtracking engine right here, capped at a safe step budget so it can't actually freeze the page.</p>
   </div>
 
@@ -56,7 +57,7 @@
     </div>
 
     <div class="chart">
-      <label>Backtracking steps vs. input length <span class="hint" style="text-transform:none;letter-spacing:0">(log scale — a straight rising line means exponential)</span></label>
+      <label>Backtracking steps vs. input length <span class="hint" style="text-transform:none;letter-spacing:0">(log scale — a steep straight climb is exponential; a gentler curve is polynomial, still deadly at scale)</span></label>
       <div id="bars" class="bars"></div>
       <div class="axis"><span id="axisL">len 1</span><span id="axisR">len N</span></div>
     </div>
@@ -89,8 +90,14 @@
       split the input among a pattern's quantifiers. When two quantifiers can match the <em>same</em> characters —
       <code class="k">(a+)+</code>, <code class="k">(x+x+)+</code>, <code class="k">([a-z0-9]+)+</code> — the number of ways doubles
       with each extra character. Add a character that forces the match to fail at the end and the engine explores them all
-      before giving up. That's <b>catastrophic backtracking</b>, and it's a classic denial-of-service bug (ReDoS):
+      before giving up. That's <b>catastrophic (exponential) backtracking</b>, and it's a classic denial-of-service bug (ReDoS):
       one crafted 30-character string can pin a CPU core for years.
+    </p>
+    <p class="hint" style="text-transform:none;letter-spacing:0;font-size:14px;color:var(--ink);margin-top:10px">
+      But most <em>real</em> outages are the quieter cousin: <b>polynomial backtracking</b>, where the work grows like the
+      <em>square</em> (or cube) of the input rather than doubling. A single <code class="k">.*.*</code> or a trailing
+      <code class="k">\s+$</code> looks innocent and passes review — then a few kilobytes of input pins the CPU. That is
+      exactly what took down <b>Cloudflare</b> (2019) and <b>Stack Overflow</b> (2016); load those presets above to watch it.
     </p>
   </div>
 

@@ -38,9 +38,15 @@ select{background:#0d1017;border:1px solid var(--line);color:var(--ink);padding:
 .badge{font-weight:800;font-size:13px;letter-spacing:.06em;text-transform:uppercase;padding:6px 12px;border-radius:8px}
 .badge.safe{background:rgba(61,220,151,.14);color:var(--safe);border:1px solid rgba(61,220,151,.35)}
 .badge.danger{background:rgba(255,77,94,.14);color:var(--danger);border:1px solid rgba(255,77,94,.4)}
+.badge.warn{background:rgba(255,176,32,.14);color:var(--warn);border:1px solid rgba(255,176,32,.4)}
 .counter{font-family:var(--mono);font-size:44px;font-weight:800;line-height:1;letter-spacing:-1px}
-.counter.danger{color:var(--danger)}
+.counter.danger,.counter.exp{color:var(--danger)}
+.counter.poly{color:var(--warn)}
 .counter.safe{color:var(--safe)}
+.story{margin-top:12px;background:var(--panel2);border:1px solid var(--line);border-left:3px solid var(--warn);
+  border-radius:10px;padding:12px 14px;font-size:13.5px;line-height:1.5;color:var(--ink)}
+.story code{font-family:var(--mono);font-size:12.5px;background:rgba(255,255,255,.06);padding:1px 4px;border-radius:4px}
+.story a{color:var(--accent)}
 .counter small{font-size:14px;color:var(--muted);font-weight:500;letter-spacing:0}
 .sub{color:var(--muted);font-size:13px;margin-top:6px}
 .chart{margin-top:14px}

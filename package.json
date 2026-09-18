@@ -1,6 +1,6 @@
 {
   "name": "regex-meltdown",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Interactive visualizer for catastrophic regex backtracking — watch your regex melt down, step by step.",
   "keywords": ["regex","redos","backtracking","visualizer","regular-expressions","security","catastrophic-backtracking","education"],
   "license": "MIT",

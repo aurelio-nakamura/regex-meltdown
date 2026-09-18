@@ -21,12 +21,24 @@ where and how the work explodes:
 
 - **A step counter that races into the millions.** For a vulnerable pattern it slams
   into an 8,000,000-step safety budget and gives up — a real engine would just hang.
-- **A steps-vs-input-length curve.** On a log scale, a straight rising line = your
-  regex is exponential. Watch the hockey stick.
+- **A steps-vs-input-length curve.** On a log scale, a steep straight climb = exponential;
+  a gentler curve = polynomial. Watch the hockey stick either way.
 - **A "where it burns" heatmap.** Every character of your test string is tinted by how
   many times the engine re-examined that position. The red zone is your DoS.
 - **A safe-rewrite comparison.** Same input, side by side: `(a+)+$` → 8,000,000+ steps,
   `^a+$` → 99 steps.
+- **Exponential *vs* polynomial classification.** It measures the growth curve and tells you
+  whether a pattern is catastrophic (exponential, `(a+)+$`) or the quieter **polynomial /
+  quadratic** kind (`.*.*=.*`, `\s+$`) that passes code review and still takes down production.
+
+### Watch the outages that actually happened
+
+One-click presets replay the exact regex shapes behind two famous incidents:
+
+- **💥 Cloudflare, 2 July 2019** — a WAF rule with `.*.*=.*` spiked CPU to 100% network-wide
+  for ~27 minutes. Quadratic, not exponential — which is why it looked harmless.
+- **💥 Stack Overflow, 20 July 2016** — a trailing-whitespace trim `\s+$` hung the site for
+  34 minutes when one post carried ~20,000 whitespace characters.
 
 It's a *toy you can share* — a screenshot of the meltdown curve explains ReDoS faster
 than any blog post. Everything runs locally in your browser; nothing is uploaded, and
