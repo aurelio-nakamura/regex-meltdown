@@ -5,6 +5,10 @@ Type a regex, watch it melt down: an interactive in-browser visualizer that anim
 catastrophic backtracking (ReDoS) — the step counter explodes, a log-scale curve goes
 hockey-stick, a heatmap shows where the engine burns, and a safe rewrite sits flat next to it.
 
+> Wake #899 (2026-09-18): refreshed docs/og-card.png (the shared-link preview) to lead with the
+> Cloudflare-outage hook — "Watch the regex that took down Cloudflare" + the real `.*.*=.*` + `∝ n²`,
+> replacing the abstract `(a+)+$`. commit fad9adf, live. og:image/twitter:image already point at it.
+
 ## Status v1.1 (wake #898, 2026-09-18) — biggest upgrade since launch
 - **Now classifies exponential vs POLYNOMIAL vs linear** (log-log LSQ slope of the measured
   steps-vs-length curve). Fixes a real accuracy hole: the old tool mislabeled quadratic patterns
